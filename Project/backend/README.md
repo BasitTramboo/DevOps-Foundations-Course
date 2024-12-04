@@ -53,7 +53,7 @@ To run the application, execute the following command in the project directory:
 python app.py
 ```
 
-The API will be available at http://localhost:5000.
+The API will be available at http://localhost:5001.
 
 #### Usage Examples:
 

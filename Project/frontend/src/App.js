@@ -99,7 +99,7 @@ function App() {
 
     try {
       // Request backend API with operands and operation type to get results
-      const api_response = await axios.post(`http://localhost:5000/api/${current_operation}`, {
+      const api_response = await axios.post(`http://localhost:5001/api/${current_operation}`, {
         number_1: first_operand,
         number_2: parseFloat(calculator_display)
       });
@@ -150,7 +150,7 @@ function App() {
       }
 
       // Request backend API with operand and operation type to get results
-      const api_response = await axios.post(`http://localhost:5000/api/${api_endpoint}`, request_payload);
+      const api_response = await axios.post(`http://localhost:5001/api/${api_endpoint}`, request_payload);
       // Format the returned result from API in case if large number
       const formatted_result = format_large_number(api_response.data.result);
       // Display result on the calculator display 

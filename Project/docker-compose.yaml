@@ -1,47 +1,41 @@
-# This is just a template placeholder docker-compose file. Use relevant sections which are applicable, 
-# and feel free to customize.
-version: '3'
+version: '3.9'
 
 services:
   frontend:
     # Specify the build context for the frontend
     build:
-    # Map the host port to the container port
+      context: ./frontend
+      dockerfile: Dockerfile
+    # Map the host port 3000 to the container port 80 (default for Nginx)
     ports:
-    # Specify dependencies (if applicable)
+      - "3000:80"
+    # Define dependencies if the frontend needs the backend running
     depends_on:
-
-    # Additional options (uncomment and configure as needed):
-    
-    # Specify environment variables if needed
-    # environment:
-    
-    # Specify volume for live code reloading (optional)
+      - backend
+    # Volume for live reloading
     # volumes:
-    
-    # Specify the command to run the development server (if different from Dockerfile)
-    # command:
+    #   - ./frontend:/app
+    networks:
+      - app-network
 
   backend:
     # Specify the build context for the backend
     build:
-    # Map the host port to the container port
+      context: ./backend
+      dockerfile: Dockerfile
+    # Map the host port 5001 to the container port 5001
     ports:
-    
-    # Additional options (uncomment and configure as needed):
-    
-    # Specify environment variables if needed
-    # environment:
-    
-    # Specify volume for live code reloading (optional)
+      - "5001:5001"
+    # Specify environment variables (example shown)
+    environment:
+      FLASK_ENV: development
+      API_KEY: "your_api_key_here"
+    # Volume for live reloading
     # volumes:
-    
-    # Specify the command to run the development server (if different from Dockerfile)
-    # command:
+    #   - ./backend:/app
+    networks:
+      - app-network
 
-# Additional components (uncomment and configure as needed):
-# Define a custom network (if applicable)
-# networks:
-
-# Define volumes (if applicable)
-# volumes:
+networks:
+  app-network:
+    driver: bridge
