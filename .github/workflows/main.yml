@@ -22,15 +22,15 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./frontend
+        working-directory: ./Project/frontend
 
       - name: Run tests
         run: npm test
-        working-directory: ./frontend
+        working-directory: ./Project/frontend
 
       - name: Build React app
         run: npm run build
-        working-directory: ./frontend
+        working-directory: ./Project/frontend
 
   backend:
     runs-on: ubuntu-latest
@@ -45,11 +45,11 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-        working-directory: ./backend
+        working-directory: ./Project/backend
 
       - name: Run tests
         run: pytest
-        working-directory: ./backend
+        working-directory: ./Project/backend
 
   docker:
     needs: [frontend, backend]
@@ -63,11 +63,11 @@ jobs:
 
       - name: Build frontend Docker image
         run: |
-          docker build -t your-dockerhub-username/frontend:latest ./frontend
+          docker build -t your-dockerhub-username/frontend:latest ./Project/frontend
 
       - name: Build backend Docker image
         run: |
-          docker build -t your-dockerhub-username/backend:latest ./backend
+          docker build -t your-dockerhub-username/backend:latest ./Project/backend
 
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
